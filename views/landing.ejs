@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+    <title>Beautiful Dashboard</title>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+      >
+        <h1 class="h2">Orchids</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="d-flex">
+            <a href="/profile/<%= user %>" class="btn btn-warning btn-sm me-2">
+              <i class="bi bi-pencil"></i> Profile
+            </a>
+            <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+          </div>
+        </div>
+      </div>
+
+      <% messages.forEach(element=> { %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= element %>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <% }) %>
+
+      <style>
+        .card {
+          width: 250px;
+          margin-bottom: 300px;
+        }
+
+        .card-img-top {
+          height: 200px;
+          object-fit: cover;
+        }
+
+        .card-body {
+          height: 250px;
+          overflow: auto;
+        }
+
+        .btn-secondary {
+          background-color: darkgray;
+          /* Replace with your color for "Options" button */
+        }
+
+        .dropdown-item:first-child {
+          background-color: aqua;
+          /* Replace with your color for "View" button */
+        }
+
+        .dropdown-item:nth-child(2) {
+          background-color: khaki;
+          /* Replace with your color for "Edit" button */
+        }
+
+        .dropdown-item:last-child {
+          background-color: crimson;
+          /* Replace with your color for "Delete" button */
+        }
+      </style>
+
+      <div class="container">
+        <div class="row">
+          <% var count=0; %> <% orchids.forEach(element=> { %> <% if(count %
+          4==0 && count !=0) { %>
+        </div>
+        <div class="row">
+          <% } %>
+          <div class="col-md-3">
+            <div class="card mb-3">
+              <img
+                src="<%= element.image %>"
+                class="card-img-top"
+                alt="<%= element.name %>"
+              />
+              <div class="card-body">
+                <h5 class="card-title"><%= element.name %></h5>
+                <p class="card-text">Price: $<%= element.price %></p>
+                <p class="card-text">Original: <%= element.original%></p>
+                <p class="card-text">Color: <%= element.color %></p>
+                <p class="card-text">
+                  Nature: <%= element.isNatural ? 'Nature' : 'Mutation' %>
+                </p>
+                <a href="/orchids/<%= element._id %>"
+                  ><i class="bi bi-eye"></i>
+                  View
+                </a>
+              </div>
+            </div>
+          </div>
+          <% count++; %> <% }) %>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
